@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Firebase Test</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <style>
+        body {
+            padding-top: 64px;
+        }
+
+        .table-col-action {
+            text-align: right;
+        }
+
+        .message {
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="/">Firebase Realtime Database Demo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Stored Messages <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-add-message">Add Message</button></h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Edited</th>
+                        <th scope="col" class="table-col-action"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="table-messages">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-add-message">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add new Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-add">
+                        <div class="form-group">
+                            <label for="form-add-title">Title</label>
+                            <input type="text" class="form-control" id="form-add-title" placeholder="Enter your title ...">
+                        </div>
+                        <div class="form-group">
+                            <label for="form-add-message">Message</label>
+                            <textarea id="form-add-message" class="form-control" placeholder="Enter your message ..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="form-add-save">Save</button>
+                        <button type="button" class="btn btn-secondary" id="form-add-abort">Abort</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-edit-message">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-edit">
+                        <input type="hidden" id="form-edit-key">
+                        <div class="form-group">
+                            <label for="form-edit-title">Title</label>
+                            <input type="text" class="form-control" id="form-edit-title" placeholder="Enter your title ...">
+                        </div>
+                        <div class="form-group">
+                            <label for="form-edit-message">Message</label>
+                            <textarea id="form-edit-message" class="form-control" placeholder="Enter your message ..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="form-edit-save">Save</button>
+                        <button type="button" class="btn btn-secondary" id="form-edit-abort">Abort</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js" integrity="sha256-CutOzxCRucUsn6C6TcEYsauvvYilEniTXldPa6/wu0k=" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <script src="/js/firebase-credentials.js"></script>
+    <script>
+        if(!window.firebaseConfig) {
+            alert('Please read the README.md to correctly setup this demo.');
+        }
+        else {
+            // Initialize Firebase
+            firebase.initializeApp(window.firebaseConfig);
+            var database = firebase.database();
+        }
+    </script>
+    <script src="js/app.js"></script>
+</body>
+</html>
